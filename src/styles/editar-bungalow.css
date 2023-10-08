@@ -3,6 +3,7 @@
     padding: 1rem 0;
     width: 90%;
     margin: 1rem 5%;
+    height: 80vh;
 }
 
 .editar h1 {
@@ -26,16 +27,21 @@
 }
 
 textarea {
-    height: 7rem;
+    height: 35vh;
     width: 80%;
+    resize: none;
 }
 
 .editar form {
-    height: 20vh;
-}
-
-.descripcion {
+    height: auto;
     display: flex;
     flex-flow: column nowrap;
-    align-items: center;
+}
+
+.editar input {
+    width: 45%;
+}
+
+.editar form label {
+    margin: 1rem 0;
 }

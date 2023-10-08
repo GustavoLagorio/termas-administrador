@@ -39,7 +39,7 @@ function Calendario({ onFechasSeleccionadas }) {
   const obtenerReservas = async (bungalowId) => {
 
     try {
-      const response = await fetch(`https://termas-server.vercel.app/api/events/filtrar?bungalow=${bungalowId}`, {
+      const response = await fetch(`https://termas-server.vercel.app/api/events/filtrar?idBungalow=${bungalowId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -51,9 +51,11 @@ function Calendario({ onFechasSeleccionadas }) {
 
         const data = await response.json();
         const reservas = data.eventos;
-        const fechasTomadas = [];
+        //modificacion
+        const fechasTomadas = [reservas.rangeDates];
+        setDisableDates([...disabledDates, ...fechasTomadas]);
 
-        // Mapea los datos para extraer las fechas de las reservas
+        //Mapea los datos para extraer las fechas de las reservas
         reservas.forEach(reserva => {
           const startDate = new Date(reserva.startDate);
           const endDate = new Date(reserva.endDate);

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReservasBungalows from '../common/ReservasBungalows';
+
+
 import '../../styles/bungalows.css'
 
 export const Bungalows = () => {
@@ -65,10 +67,16 @@ export const Bungalows = () => {
                         </li>
                     )
                     )}
-                </ul></div>
+                </ul>
+            </div>
+            <div className="clientes">
+                <h2>Base de datos de Clientes</h2>
+                <Link to='/clientes'>Clientes</Link>
+            </div>
 
             <div className="buscar">
                 <h2>Listado de Reservas</h2>
+                <p>Esta lista muestra todas las reservas con fecha de salida mayor al dia actual</p>
                 <ReservasBungalows />
             </div>
 

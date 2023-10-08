@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { Bungalows } from "../pages/Bungalows";
+import { Clientes } from "../pages/Clientes";
 
-export const BungalowsAuth = () => {
+export const ClientesAuth = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -42,7 +42,7 @@ export const BungalowsAuth = () => {
 
   if (isLoggedIn) {
 
-    return <Bungalows />;
+    return <Clientes />;
 
   } else {
 

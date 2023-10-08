@@ -10,6 +10,7 @@ import Layout from "./componentes/common/Layout";
 import { BungalowsAuth } from "./componentes/routes-auth/Bungalows-auth";
 import { BungalowAuth } from './componentes/routes-auth/Bungalow-auth';
 import { EditarBungalowAuth } from "./componentes/routes-auth/Editar-bungalow-auth";
+import { ClientesAuth } from "./componentes/routes-auth/Clientes-auth";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
       {
         path: "/bungalows/:idBungalow/editar-bungalow", //* cuando entramos a la url
         element: <EditarBungalowAuth />, //* renderizamos este componente,
+        errorElement: <Error404 /> //* si la pagina no existe mostramos este componente
+      },
+      {
+        path: "/clientes", //* cuando entramos a la url
+        element: <ClientesAuth />, //* renderizamos este componente,
         errorElement: <Error404 /> //* si la pagina no existe mostramos este componente
       },
       {

@@ -86,46 +86,70 @@ const ReservasBungalows = () => {
 
     } else {
 
+        const fechaActual = new Date();
+
         return <div className="reservas">
             <ul>
 
-                {reservas.map((reserva) => (
-                    <li key={reserva.id} className="reserva">
-                        <ul>
-                            <li>
-                                <span>Bungalow:</span>
-                                <span></span>
-                            </li>
-                            <li>
-                                <span>Nombre:</span>
-                                <span>{reserva.nombre}</span></li>
-                            <li>
-                                <span>Apellido:</span>
-                                <span>{reserva.apellido}</span></li>
-                            <li>
-                                <span>Teléfono:</span>
-                                <span>{reserva.telefono}</span></li>
-                            <li>
-                                <span>Email:</span>
-                                <span>{reserva.email}</span></li>
-                            <li>
-                                <span>Documento:</span>
-                                <span>{reserva.documento}</span></li>
-                            <li>
-                                <span>Check-in:</span>
-                                <span>{new Date(reserva.startDate).toLocaleDateString('es-AR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</span></li>
-                            <li>
-                                <span>Check-out:</span>
-                                <span>{new Date(reserva.endDate).toLocaleDateString('es-AR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</span></li>
-                        </ul>
-                        <span>
-                            <button className="btn" onClick={() => eliminarReserva(reserva.id)}>
-                                Eliminar
-                            </button>
-                        </span>
-                    </li>
-                )
-                )}
+                {reservas
+                    .filter((reserva) => new Date(reserva.endDate) >= fechaActual)
+                    .map((reserva) => (
+                        <li key={reserva.id} className="reserva">
+                            <h3>{reserva.bungalow}</h3>
+                            <ul>                                
+                                <li>
+                                    <span>Nombre:</span>
+                                    <span>{reserva.nombre}</span>
+                                </li>
+                                <li>
+                                    <span>Apellido:</span>
+                                    <span>{reserva.apellido}</span>
+                                </li>
+                                <li>
+                                    <span>Teléfono:</span>
+                                    <span>{reserva.telefono}</span>
+                                </li>
+                                <li>
+                                    <span>Email:</span>
+                                    <span>{reserva.email}</span>
+                                </li>
+                                <li>
+                                    <span>Documento:</span>
+                                    <span>{reserva.documento}</span>
+                                </li>
+                                <li>
+                                    <span>Check-in:</span>
+                                    <span>{new Date(reserva.startDate).toLocaleDateString('es-AR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
+                                </li>
+                                <li>
+                                    <span>Check-out:</span>
+                                    <span>{new Date(reserva.endDate).toLocaleDateString('es-AR', { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
+                                </li>
+                                <li>
+                                    <span>Auto:</span>
+                                    <span>{reserva.auto}</span>
+                                </li>
+                                <li>
+                                    <span>Patente:</span>
+                                    <span>{reserva.patente}</span>
+                                </li>
+                                <li>
+                                    <span>Pagado:</span>
+                                    <span>${reserva.pago}</span>
+                                </li>
+                                <li>
+                                    <span>Notas:</span>
+                                    <span>{reserva.notas}</span>
+                                </li>
+                            </ul>
+                            <span>
+                                <button className="btn" onClick={() => eliminarReserva(reserva.id)}>
+                                    Eliminar
+                                </button>
+                            </span>
+                        </li>
+                    )
+                    )}
             </ul>
         </div>
 

@@ -38,6 +38,8 @@
     margin: 2rem 0;
     width: 100%;
     font-weight: bold;
+    background-color: #4697b4;
+    padding: 1rem 0;
 }
 
 .reservas ul {
@@ -53,4 +55,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     margin-top: 0.5rem;
+}
+.reserva ul li span:last-child {
+    text-align: left;
 }

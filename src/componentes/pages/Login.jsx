@@ -35,7 +35,7 @@ export const Login = () => {
         const { token } = await response.json();
 
         //guardar el token
-        localStorage.setItem('accessToken', token);        
+        localStorage.setItem('accessToken', token);
         
         return navigate("/bungalows");
       } else {
