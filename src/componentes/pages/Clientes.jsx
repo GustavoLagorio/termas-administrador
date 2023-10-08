@@ -14,7 +14,7 @@ export const Clientes = () => {
         const obtenerClientes = async () => {
 
             try {
-                const response = await fetch('http://localhost:4000/api/events/clientes', {
+                const response = await fetch('https://termas-server.vercel.app/api/events/clientes', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
