@@ -8,18 +8,22 @@ import '../../styles/bungalow.css'
 
 export const Bungalow = () => {
 
+  //Carga informacion del bungalow y estados de carga
   const [bungalow, setBungalow] = useState({});
-
   const [isLoading, setIsLoading] = useState(true);
 
+  //Leemos el parametro id en la url para determinar el numero de bungalow seleccionado
+  //ese valor se parsea porque es string
   const { idBungalow } = useParams();
-
   const bungalowId = parseInt(idBungalow);
 
+
+  //Obtenemos el token revalidado
   const token = localStorage.getItem('accessToken');
 
   const navigate = useNavigate();
 
+  //Estructura de la informacion del formulario y la BD
   const [formulario, setFormulario] = useState({
     idBungalow: '',
     bungalow: '',
@@ -38,83 +42,97 @@ export const Bungalow = () => {
 
   const { nombre, apellido, telefono, email, documento, startDate, endDate, auto, patente, pago, notas } = formulario;
 
+  //Evita que el calendario deje de renderizarse al hacerle click en una fecha
   const [fechas, setFechas] = useState({
+
     startDate: new Date(),
     endDate: new Date(),
+
   });
 
   useEffect(() => {
 
+    //Obtenemos el bungalow segun el id del params
     const obtenerBungalow = async () => {
 
       try {
-        const response = await fetch(`https://termas-server.vercel.app/api/bungalows/${bungalowId}`, {
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/bungalows/${bungalowId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'x-token': token
+
           },
         })
 
         if (response.status === 200) {
-
+          
+          //Se guarda la informacion en bungalow, se desestructura el nombre y se
+          //guarda la informacion del nombre y el id en el formulario
           const data = await response.json();
           setBungalow(data.bungalow[0]);
-          console.log(bungalow);
           const { nombre } = data.bungalow[0]
-          console.log(nombre);
+          //Toma el estado previo y lo sobreescribe solo en los parametros dados
           setFormulario(prevState => ({
+
             ...prevState,
             idBungalow: bungalowId,
             bungalow: nombre
+
           }));          
-          console.log(formulario);
           setIsLoading(false);
 
         } else {
+
           console.error('Error al obtener los bungalows:', response.statusText);
+
         }
       } catch (error) {
+
         console.log(error);
+
       } finally {
+
         setIsLoading(false);
+
       }
 
     };
 
+    //LLamamos al al funcion para obtener el bungalow
     obtenerBungalow();  
 
-  }, [token, bungalowId]);
+  }, [token, bungalowId]); //Se le da como parametros el token y el bungalowId para que se ejecute cuando estos cambian
 
   const handleInputChange = (e) => {
+
     // Actualiza el estado del formulario cuando los campos de entrada cambian
     setFormulario({ ...formulario, [e.target.name]: e.target.value });
+
   };
 
-  const handleFechasSeleccionadas = (startDate, endDate) => {
-    //Esta funcion se pasa como parametro al componente Calendario para
-    //tomar las fechas seleccionadas
-    //Guardamos las fechas del rango
-    /*for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
-      rangeDates.push(new Date(currentDate));
-    }*/
+  //Guarda las fechas seleccionadas del componente Calendario
+  const handleFechasSeleccionadas = (startDate, endDate) => {    
+
     setFechas({ startDate, endDate });
     setFormulario({
       ...formulario,
       startDate,
       endDate,
-      //rangeDates
     });
   };
 
+  //Ejecuta el envio del formulario al servidor
   const handleReservaSubmit = async (e) => {
 
     e.preventDefault();
-    console.log(formulario);
 
     const token = localStorage.getItem('accessToken');
+
     try {
-      const response = await fetch('https://termas-server.vercel.app/api/events/', {
+
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/events`, {
         
         method: 'POST',
         headers: {
@@ -123,15 +141,16 @@ export const Bungalow = () => {
         },
         body: JSON.stringify(formulario)
 
-
       })
 
       if (response.status === 200) {
 
+        //Si la respuesta es 200 navega hasta el menu de Bungalows para seguir trabajando
         return navigate("/bungalows");
 
       } else {
 
+        //Si falla por algun motivo navega al login para reloguear
         console.error('Inicio de sesión fallido');
         return navigate("/");
 
@@ -150,6 +169,7 @@ export const Bungalow = () => {
       <div className="reservar">
         <h2>Realiza una nueva reserva</h2>
         <form onSubmit={handleReservaSubmit}>
+          {/*Pasamos como parametro la funcion que maneja las fechas seleccionadas*/}
           <Calendario onFechasSeleccionadas={handleFechasSeleccionadas} />
           <input type="text" required={true} className="campo" name="nombre" value={nombre} onChange={handleInputChange} placeholder="Nombre" />
           <input type="text" required={true} className="campo" name="apellido" value={apellido} onChange={handleInputChange} placeholder="Apellido" />
@@ -165,6 +185,8 @@ export const Bungalow = () => {
       </div>
       <div className="buscar">
         <h2>Lista de reservas</h2>
+        {/*Llamamos al componente ReservasPorBungalow que muestra las reservas del
+        bungalow seleccionado*/}
         <ReservasPorBungalow bungalowId={bungalowId} />
       </div>
     </main>

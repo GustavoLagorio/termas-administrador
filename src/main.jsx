@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import './styles/global.css'
 
+//Importamos componentes
 import { Login } from '../src/componentes/pages/Login';
 import { Error404 } from "./componentes/pages/Error404";
 import Layout from "./componentes/common/Layout";

@@ -1,19 +1,26 @@
-.bungalows {    
+.bungalows {   
+
     margin-bottom: 3rem;
     margin: 2rem 0;
-    width: 100%;    
+    width: 100%;   
+
 }
 
 .bungalows-list {
+
     background-color: #4697b4;
     padding: 1rem;
+
 }
 
 .bungalows-list h1 {
+
     margin-top: 0;
+
 }
 
 .bungalows a {
+
     font-size: 1rem;
     background-color: #254b5e;
     color: white;
@@ -21,41 +28,57 @@
     text-decoration: none;
     margin: 1rem;
     box-shadow:  13px 6px 15px rgba(0, 0, 0, 0.6);
+
 }
 
 .bungalows-list ul {
+
     height: 75%;
     list-style: none;
     padding: 0;
+
 }
 
 .bungalows-list li {
+
     margin: 4rem;
     height: 20%;
+
 }
 
 .bungalows .buscar {
+
     margin: 2rem 0;
     width: 100%;
     font-weight: bold;
     background-color: #4697b4;
     padding: 1rem 0;
+
 }
 
 .reservas ul {
+
     list-style: none;
     padding: 0;
+
 }
 
 .reserva {
+
     margin-bottom: 4rem;
+
 }
 
 .reserva ul li {
+
     display: grid;
     grid-template-columns: 1fr 2fr;
     margin-top: 0.5rem;
+
 }
+
 .reserva ul li span:last-child {
+
     text-align: left;
+    
 }

@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import '../../styles/login.css';
 
-export const Login = () => {  
 
+export const Login = () => {
+
+  //Estructura del formulario de login
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -12,17 +14,19 @@ export const Login = () => {
 
   const navigate = useNavigate();
 
+  //Toma los cambios del input y los carga en el formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  //Envia el formulario al servidor
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
     try {      
-      const response = await fetch('https://termas-server.vercel.app/api/auth', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth`, {
         method:'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,6 +34,7 @@ export const Login = () => {
         body: JSON.stringify(formData)
       })
       
+      //Si la respuesta es 200 devuelve un JWT que se guarda en el localStorage para posteriores validaciones
       if(response.status === 200) {
         //obtencion del token
         const { token } = await response.json();
@@ -49,6 +54,7 @@ export const Login = () => {
 
 
   return (
+    //El formulario toma los valores del formulario declarado al inicio del componente
     <main className='login'>
         <h1>Login Administrador</h1>        
         <form action="" onSubmit={handleSubmit}>

@@ -1,110 +1,152 @@
 .reservar .rdrDefinedRangesWrapper {
+
     display: none;
+
   }
 
 .reservar .rdrDateRangePickerWrapper {
+
     width: 90%;
     padding: 1rem;
+
 } 
 .reservar .rdrMonthName {
+
     display: none;
+
 }
 
 .rdrCalendarWrapper.rdrDateRangeWrapper, .rdrMonth, .rdrDayNumber, .rdrDateDisplayWrapper,
 .rdrDateDisplay, .rdrMonthAndYearWrapper {
+
     width: 100%;
     background-color: #4697b4;
+
 }
 .rdrMonthAndYearWrapper span select{
+
     font-size: 1rem;
     font-weight: bolder;
+
 }
 
 .reservar .rdrDateDisplayWrapper {
+
     height: 4rem;
     display: flex;
     
 }
 
 .rdrMonthAndYearWrapper button {
+
     margin: 0;
+
 }
 
 .rdrDateInput, .rdrMonthAndYearPickers, .rdrMonthPicker, .rdrYearPicker, .rdrWeekDays,
 .rdrWeekDays span, .rdrDays, .rdrDays button, .rdrDays button span, .rdrDays button span span{
+
     background: none;    
+
 }
 .rdrDays{
+
     justify-content: space-around;
         
 }
 
 .rdrWeekDay {
+
     color: #333333;
     font-size: 1.1rem;
+
 }
 .rdrDays button {
+
     width: calc(100% / 7);
     padding: 0;
+
 }
 
 .rdrDays .rdrDay .rdrDayNumber span {
+
     width: 70%;
     margin: 0 15%;    
     border-radius: 20%;
     color: white;
     font-size: 1.1rem;
+
 }
 
 span::after {
+
     position: relative;
     top: 1.5rem;
+
 }
 
 .rdrStartEdge, .rdrInRange, .rdrEndEdge {
+
     background-color: #254b5e !important;
+
 }
 
 .rdrDays .rdrDayDisabled .rdrDayNumber span {
+
     background: none;
     color: #333333;
+    
 }
 
 .rdrDateInput {
+
     box-shadow: none;
     border: none;
+
 }
 
 .rdrDateInput.rdrDateDisplayItem input {
+
     background-color: white;
+
 }
 
 .rdrDateRangePickerWrapper{
+
     background-color: #4697b4;
     width: 100%;
     padding: 0 1rem;
     justify-content: space-between;
+
 }
 
 .rdrDateDisplay .rdrDateInput {
+
     margin: 0;
     width: 50%;
+
 }
 
 .rdrDateDisplay {
+    
     margin: 1rem 0;
     height: 1rem;
+
 }
 
 .rdrDateDisplay input {
+
     color: #333333;
     font-size: 1.2rem;
     border: solid 1px #333333;
     width: 90%;
     margin: 0 5%;
     border-radius: 1rem;
+
 }
 
 .rdrMonth {
+
     padding: 0 0.5rem;
+    
 }

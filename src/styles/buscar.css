@@ -1,16 +1,21 @@
 .buscar {
+
     background-color: #4697b4;
     padding: 1rem 0;
     width: 90%;
     margin: 1rem 5%;
+
 }
 
 .buscar input {
+
     margin: 1rem 15%;
     width: 70%;
+
 }
 
 .buscar button {
+
     background-color: #254b5e;
     border: 0;
     height: 2rem;
@@ -20,11 +25,14 @@
     width: 70%;
     margin: 1rem 15%;
     box-shadow:  13px 6px 15px rgba(0, 0, 0, 0.6);
+
 }
 
 .resultados {
+
     background-color: #4697b4;
     padding: 1rem 0;
     width: 90%;
     margin: 1rem 5%;
+    
 }

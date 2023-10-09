@@ -4,42 +4,54 @@ import { DateRangePicker } from 'react-date-range';
 import es from 'date-fns/locale/es';
 import { addDays, startOfDay, isSameDay } from 'date-fns'; // Importa funciones de date-fns
 
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
 import "../../styles/calendario.css"
 
+//Recibe como parametros una funcion del componente Bungalow para manejar las fechas seleccionadas
 function Calendario({ onFechasSeleccionadas }) {
 
+  //Obtenemos idBungalows de la URL como parametro para identificar que bungalow seleccionamos
+  //tambien paeseamos ese valor porque es string
   const { idBungalow } = useParams();
-
   const bungalowId = parseInt(idBungalow);
 
+  //Se declara un estado que controla el rango de fechas seleccionadas
   const [dateRange, setDateRange] = useState([
+
     {
       startDate: new Date(),
       endDate: new Date(),
       key: 'selection',
     },
+
   ]);
 
-  const handleSelect = (ranges) => {
-    const { startDate, endDate } = ranges.selection;
-    onFechasSeleccionadas(startDate, endDate);
-    setDateRange([ranges.selection]);
-  };
+  //Declaramos el estado que maneja las fechas desabilitadas
+  const [disabledDates, setDisableDates] = useState([])
 
-  const today = addDays(startOfDay(new Date()), 3);
-
-  const [disabledDates, setDisableDates] = useState([
-
-  ])
-
+  //Obtenemos el token revalidado
   const token = localStorage.getItem('accessToken');
 
+  //Maneja la seleccion de fechas del calendario
+  const handleSelect = (ranges) => {
+
+    const { startDate, endDate } = ranges.selection;
+    //Ejecutamos la funcion que proviene de Bungalow para guardar las fechas seleccionadas
+    onFechasSeleccionadas(startDate, endDate);
+    setDateRange([ranges.selection]);
+
+  };
+
+  //Declaramos como today el dia de la fecha mas 2 dias para esperar acreditacion del pago de reserva
+  const today = addDays(startOfDay(new Date()), 3);
+
+
+  //Obtenemos las reservas
   const obtenerReservas = async (bungalowId) => {
 
     try {
-      const response = await fetch(`https://termas-server.vercel.app/api/events/filtrar?idBungalow=${bungalowId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/events/filtrar?idBungalow=${bungalowId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -49,13 +61,14 @@ function Calendario({ onFechasSeleccionadas }) {
 
       if (response.status === 200) {
 
+        //Si la respuesta es 200 guardamos las fechas de la reservas en fechas tomadas para actualizar
+        //las fechas desabilitadas
         const data = await response.json();
         const reservas = data.eventos;
-        //modificacion
         const fechasTomadas = [reservas.rangeDates];
         setDisableDates([...disabledDates, ...fechasTomadas]);
 
-        //Mapea los datos para extraer las fechas de las reservas
+        //Mapea los datos para extraer las fechas de las reservas y agregamos como array cada dia entre las fechas de reserva
         reservas.forEach(reserva => {
           const startDate = new Date(reserva.startDate);
           const endDate = new Date(reserva.endDate);
@@ -71,25 +84,34 @@ function Calendario({ onFechasSeleccionadas }) {
         return fechasTomadas;
 
       } else {
+
         console.error('Error al obtener las reservas:', response.statusText);
+
       }
     } catch (error) {
+
       console.log(error);
+
     }
 
   };
 
+  //Usamos useEffect con parametro bungalowId para que se ejecute la funcion obtenerReservas
+  //cuando cambia el bungalowId
   useEffect(() => {
     obtenerReservas(bungalowId);
   }, [bungalowId])
 
   const isDateDisabled = (date) => {
+
     // Verifica si la fecha está en el arreglo de fechas deshabilitadas
     return disabledDates.some((disabledDate) =>
       isSameDay(disabledDate, date)
     );
+
   };
 
+  //datProps recorre cada fecha desde el valor minimo al maximo y controla si esta desabilitada
   return (
     <div>
       <DateRangePicker

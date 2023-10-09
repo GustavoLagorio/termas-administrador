@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const ReservasBungalows = () => {
 
+    //Obtenemos el token revalidado
     const token = localStorage.getItem('accessToken');
+
     const navigate = useNavigate();
 
+    //Declaramos los estados que manejan las reservas, el estado de carga y el error
     const [reservas, setReservas] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
 
+        //Obtenemos todas las reservas de la base de datos
         const obtenerReservasGenerales = async () => {
 
             try {
-                const response = await fetch('https://termas-server.vercel.app/api/events/', {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/events`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -25,30 +32,35 @@ const ReservasBungalows = () => {
 
                 if (response.status === 200) {
 
+                    //Si la respuesta es 200 se guardan los eventos en reservas y se pone la carga en false
                     const data = await response.json();
-
                     setReservas(data.eventos);
                     setCargando(false);
 
-
                 } else {
+
                     console.error('Error al obtener las reservas:', response.statusText);
+
                 }
             } catch (error) {
+
                 setError(error);
                 console.log(error);
-            }
 
+            }
         };
 
+        //Llamamos a la funcion para obtener las reservas
         obtenerReservasGenerales();
 
-    }, [token]);
+    }, [token]); //Pasamos como parametro el token para que cuando este cambie la funcion se ejecute
 
+    //Funcion para eliminar la reserva que recibe como parametro el id de reserva
     const eliminarReserva = async (idReserva) => {
+
         try {
-            const response = await fetch(
-                `https://termas-server.vercel.app/api/events/${idReserva}`,
+
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/events/${idReserva}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -67,36 +79,79 @@ const ReservasBungalows = () => {
 
                 );
 
+                //Se guarda la lista de reservas actualizada y se navega al menu de bungalows
                 setReservas(nuevasReservas);
                 return navigate("/bungalows");
 
             } else {
+
                 console.error("Error al eliminar la reserva:", response.statusText);
+
             }
         } catch (error) {
+
             console.error("Error al eliminar la reserva:", error);
+
         }
     };
 
+    //Esta funcion se ejecuta al darle click al boton eliminar y da una alerta de confirmacion
+    const mostrarAlerta = (idReserva) => {
+
+        Swal.fire({
+            title: 'Requiere Confirmación',
+            text: "¿Desea eliminar la reserva?",
+            icon: 'warning',
+            iconColor: '#f8333c',
+            showCancelButton: true,
+            confirmButtonColor: '#44af69',
+            cancelButtonColor: '#254b5e',
+            confirmButtonText: 'Eliminar',
+            cancelButtonText: 'Cancelar',
+            background: '#f1e6d2'
+
+        }).then((result) => {
+            //Si se confirma la accion se llama a eliminarReserva
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Eliminado',
+                    'La reserva fue eliminada',
+                    'success'
+                )
+                eliminarReserva(idReserva)
+
+            }
+        })
+    }
+
     if (cargando) {
+
         return <div>Cargando Reservas...</div>
+
     }
     if (error) {
+
         return <div>Error al cargar Reservas</div>
 
     } else {
 
+        //Invertimos el array de reservas para mostrar de la mas reciente a la mas antigua
+        const reservasInvertidas = [...reservas].reverse();
+
+        //Determinamos la fecha actual para filtar reservas
         const fechaActual = new Date();
 
         return <div className="reservas">
             <ul>
 
-                {reservas
+                {reservasInvertidas
+                    //Filtramos y mapeamos las reservas. Se muestras todas las reservas que estan
+                    //vigentes al dia de la fecha
                     .filter((reserva) => new Date(reserva.endDate) >= fechaActual)
                     .map((reserva) => (
                         <li key={reserva.id} className="reserva">
                             <h3>{reserva.bungalow}</h3>
-                            <ul>                                
+                            <ul>
                                 <li>
                                     <span>Nombre:</span>
                                     <span>{reserva.nombre}</span>
@@ -143,7 +198,7 @@ const ReservasBungalows = () => {
                                 </li>
                             </ul>
                             <span>
-                                <button className="btn" onClick={() => eliminarReserva(reserva.id)}>
+                                <button className="btn" onClick={() => mostrarAlerta(reserva.id)}>
                                     Eliminar
                                 </button>
                             </span>

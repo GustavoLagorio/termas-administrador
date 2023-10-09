@@ -1,18 +1,23 @@
 .login form {
+
     display: flex;
     flex-flow: column nowrap;
     width: 80%;
     margin: 2rem 10%;
     background-color: #4697b4;
+
 }
 
 .login input, .login button {
+
     margin: 5% 10%;
     height: 1.5rem;
     width: 80%;
+
 }
 
 .login button {
+
     height: 2rem;
     width: 70%;
     margin: 5% 15%;
@@ -21,4 +26,5 @@
     border: 0;
     color: white;
     font-size: 1.5rem;
+    
 }
