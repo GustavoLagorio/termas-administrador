@@ -26,6 +26,7 @@ export const Login = () => {
     e.preventDefault();
 
     try {      
+      console.log(import.meta.env.VITE_API_URL);
       const response = await fetch(`${import.meta.env.VITE_API_URL}/auth`, {
         method:'POST',
         headers: {
