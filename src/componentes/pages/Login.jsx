@@ -27,7 +27,7 @@ export const Login = () => {
 
     try {      
       console.log(import.meta.env.VITE_API_URL);
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth`, {
+      const response = await fetch(`https://termas-server.vercel.app/api/auth`, {
         method:'POST',
         headers: {
           'Content-Type': 'application/json',
