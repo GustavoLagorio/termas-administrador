@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReservasBungalows from '../common/ReservasBungalows';
-import { getEnvironments } from '../../helpers/getEnvironments';
+ 
 
 
 import '../../styles/bungalows.css'
 
 export const Bungalows = () => {
 
-    const { VITE_API_URL } = getEnvironments();
+     
 
     //Obtiene el token revalidado
     const token = localStorage.getItem('accessToken');
@@ -22,7 +22,7 @@ export const Bungalows = () => {
         const obtenerBungalows = async () => {
 
             try {
-                const response = await fetch(`${VITE_API_URL}/bungalows`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/bungalows`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

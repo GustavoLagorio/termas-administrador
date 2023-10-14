@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { DateRangePicker } from 'react-date-range';
 import es from 'date-fns/locale/es';
 import { addDays, startOfDay, isSameDay } from 'date-fns'; // Importa funciones de date-fns
-import { getEnvironments } from '../../helpers/getEnvironments';
+ 
 
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -12,7 +12,7 @@ import "../../styles/calendario.css"
 //Recibe como parametros una funcion del componente Bungalow para manejar las fechas seleccionadas
 function Calendario({ onFechasSeleccionadas }) {
 
-  const { VITE_API_URL } = getEnvironments();
+   
 
   //Obtenemos idBungalows de la URL como parametro para identificar que bungalow seleccionamos
   //tambien paeseamos ese valor porque es string
@@ -54,7 +54,7 @@ function Calendario({ onFechasSeleccionadas }) {
   const obtenerReservas = async (bungalowId) => {
 
     try {
-      const response = await fetch(`${VITE_API_URL}/events/filtrar?idBungalow=${bungalowId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/events/filtrar?idBungalow=${bungalowId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

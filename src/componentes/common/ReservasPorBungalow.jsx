@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { getEnvironments } from '../../helpers/getEnvironments';
+ 
 
 import '../../styles/bungalow.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 const BusquedaBungalow = ({ bungalowId }) => {
 
-    const { VITE_API_URL } = getEnvironments();
+     
 
     //Obtenemos el idBungalow del parametro de la URL para determinar el bungalow seleccionado
     const idBungalow = parseInt(bungalowId)
@@ -26,7 +26,7 @@ const BusquedaBungalow = ({ bungalowId }) => {
     //Funcion para eliminar la reserva que recibe como parametro el id de reserva
     const eliminarReserva = async (idReserva) => {
         try {
-            const response = await fetch(`${VITE_API_URL}/events/${idReserva}`,
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/events/${idReserva}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -96,7 +96,7 @@ const BusquedaBungalow = ({ bungalowId }) => {
 
             try {
 
-                const response = await fetch(`${VITE_API_URL}/events/filtrar?idBungalow=${idBungalow}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/events/filtrar?idBungalow=${idBungalow}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

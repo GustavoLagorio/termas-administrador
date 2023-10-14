@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { Clientes } from "../pages/Clientes";
-import { getEnvironments } from '../../helpers/getEnvironments';
+ 
 
 //Este componente es un estadio intermedio entre la vista anterior y la vista Clientes
 //el objetivo es validar el JWT guadado en el localStorage antes de renderizar Clientes
 
 export const ClientesAuth = () => {
 
-  const { VITE_API_URL } = getEnvironments();
+   
 
   //Se declaran estados de 'cargando' y 'esta logueado'
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +22,7 @@ export const ClientesAuth = () => {
       try {
 
         const token = localStorage.getItem('accessToken');
-        const response = await fetch(`${VITE_API_URL}/auth/renew`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/renew`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

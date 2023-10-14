@@ -1,12 +1,11 @@
 import { useParams, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
-import { getEnvironments } from '../../helpers/getEnvironments';
 
 import '../../styles/editar-bungalow.css'
 
 export const EditarBungalows = () => {
 
-  const { VITE_API_URL } = getEnvironments();
+   
 
   //Declaramos los estados que van a controlar el bungalow, los precios y la descripcion
   const [bungalow, setBungalow] = useState({});
@@ -35,7 +34,7 @@ export const EditarBungalows = () => {
     const obtenerBungalow = async () => {
 
       try {
-        const response = await fetch(`${VITE_API_URL}/bungalows/${bungalowId}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/bungalows/${bungalowId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -98,7 +97,7 @@ export const EditarBungalows = () => {
     //Enviamos la modificacion de los precios o de la descripcion en el body
     try {
 
-      const response = await fetch(`${VITE_API_URL}/bungalows/precio/${bungalowId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/bungalows/precio/${bungalowId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
