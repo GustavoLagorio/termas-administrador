@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { DateRangePicker } from 'react-date-range';
 import es from 'date-fns/locale/es';
 import { addDays, startOfDay, isSameDay } from 'date-fns'; // Importa funciones de date-fns
+import { getEnvironments } from '../../helpers/getEnvironments';
 
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';

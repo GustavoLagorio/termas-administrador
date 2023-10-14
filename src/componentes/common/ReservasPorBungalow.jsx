@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { getEnvironments } from '../../helpers/getEnvironments';
 
 import '../../styles/bungalow.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 const BusquedaBungalow = ({ bungalowId }) => {
+
+    const { VITE_API_URL } = getEnvironments();
 
     //Obtenemos el idBungalow del parametro de la URL para determinar el bungalow seleccionado
     const idBungalow = parseInt(bungalowId)

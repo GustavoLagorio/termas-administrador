@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { getEnvironments } from '../../helpers/getEnvironments';
 
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 const ReservasBungalows = () => {
+
+    const { VITE_API_URL } = getEnvironments();
 
     //Obtenemos el token revalidado
     const token = localStorage.getItem('accessToken');

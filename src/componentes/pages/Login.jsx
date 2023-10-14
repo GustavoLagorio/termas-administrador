@@ -30,7 +30,6 @@ export const Login = () => {
     e.preventDefault();
 
     try {      
-      console.log(VITE_API_URL);
       const response = await fetch(`${VITE_API_URL}/auth`, {
         method:'POST',
         headers: {
