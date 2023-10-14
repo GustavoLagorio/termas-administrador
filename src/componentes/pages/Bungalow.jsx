@@ -9,6 +9,8 @@ import '../../styles/bungalow.css'
 
 export const Bungalow = () => {
 
+  const { VITE_API_URL } = getEnvironments();
+
   //Carga informacion del bungalow y estados de carga
   const [bungalow, setBungalow] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -58,7 +60,7 @@ export const Bungalow = () => {
 
       try {
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/bungalows/${bungalowId}`, {
+        const response = await fetch(`${VITE_API_URL}/bungalows/${bungalowId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -133,7 +135,7 @@ export const Bungalow = () => {
 
     try {
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/events`, {
+      const response = await fetch(`${VITE_API_URL}/events`, {
         
         method: 'POST',
         headers: {

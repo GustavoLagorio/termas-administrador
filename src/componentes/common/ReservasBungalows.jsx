@@ -22,7 +22,7 @@ const ReservasBungalows = () => {
         const obtenerReservasGenerales = async () => {
 
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/events`, {
+                const response = await fetch(`${VITE_API_URL}/events`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const ReservasBungalows = () => {
 
         try {
 
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/events/${idReserva}`,
+            const response = await fetch(`${VITE_API_URL}/events/${idReserva}`,
                 {
                     method: "DELETE",
                     headers: {

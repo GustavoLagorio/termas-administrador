@@ -8,6 +8,8 @@ import { getEnvironments } from '../../helpers/getEnvironments';
 
 export const BungalowAuth = () => {
 
+  const { VITE_API_URL } = getEnvironments();
+
   //Se declaran estados de 'cargando' y 'esta logueado'
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,7 +22,7 @@ export const BungalowAuth = () => {
       try {
 
         const token = localStorage.getItem('accessToken');
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/renew`, {
+        const response = await fetch(`${VITE_API_URL}/auth/renew`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -23,7 +23,7 @@ const BusquedaBungalow = ({ bungalowId }) => {
     //Funcion para eliminar la reserva que recibe como parametro el id de reserva
     const eliminarReserva = async (idReserva) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/events/${idReserva}`,
+            const response = await fetch(`${VITE_API_URL}/events/${idReserva}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -93,7 +93,7 @@ const BusquedaBungalow = ({ bungalowId }) => {
 
             try {
 
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/events/filtrar?idBungalow=${idBungalow}`, {
+                const response = await fetch(`${VITE_API_URL}/events/filtrar?idBungalow=${idBungalow}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

@@ -4,7 +4,9 @@ import { getEnvironments } from '../../helpers/getEnvironments';
 import '../../styles/clientes.css'
 
 export const Clientes = () => {
-    
+
+    const { VITE_API_URL } = getEnvironments();    
+
     //Obtenemos el token revalidado
     const token = localStorage.getItem('accessToken');
 
@@ -19,7 +21,7 @@ export const Clientes = () => {
 
             try {
 
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/events/clientes`, {
+                const response = await fetch(`${VITE_API_URL}/events/clientes`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

@@ -11,6 +11,8 @@ import "../../styles/calendario.css"
 //Recibe como parametros una funcion del componente Bungalow para manejar las fechas seleccionadas
 function Calendario({ onFechasSeleccionadas }) {
 
+  const { VITE_API_URL } = getEnvironments();
+
   //Obtenemos idBungalows de la URL como parametro para identificar que bungalow seleccionamos
   //tambien paeseamos ese valor porque es string
   const { idBungalow } = useParams();
@@ -51,7 +53,7 @@ function Calendario({ onFechasSeleccionadas }) {
   const obtenerReservas = async (bungalowId) => {
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/events/filtrar?idBungalow=${bungalowId}`, {
+      const response = await fetch(`${VITE_API_URL}/events/filtrar?idBungalow=${bungalowId}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
