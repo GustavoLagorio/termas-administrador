@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Calendario from '../common/Calendario'
 import React, { useState, useEffect } from 'react';
 import ReservasPorBungalow from '../common/ReservasPorBungalow';
+import { getEnvironments } from '../../helpers/getEnvironments';
 
 import '../../styles/bungalow.css'
 

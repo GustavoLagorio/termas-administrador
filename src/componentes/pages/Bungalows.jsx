@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReservasBungalows from '../common/ReservasBungalows';
+import { getEnvironments } from '../../helpers/getEnvironments';
 
 
 import '../../styles/bungalows.css'

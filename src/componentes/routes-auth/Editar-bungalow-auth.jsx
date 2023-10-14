@@ -1,6 +1,7 @@
 import { EditarBungalows } from "../pages/Editar-bungalows";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { getEnvironments } from '../../helpers/getEnvironments';
 
 //Este componente es un estadio intermedio entre la vista anterior y la vista EditarBungalow
 //el objetivo es validar el JWT guadado en el localStorage antes de renderizar EditarBungalow

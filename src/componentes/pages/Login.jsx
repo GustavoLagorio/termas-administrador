@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getEnvironments } from '../../helpers/getEnvironments';
 
 import '../../styles/login.css';
 
 
+
 export const Login = () => {
+
+  const { VITE_API_URL } = getEnvironments();
 
   //Estructura del formulario de login
   const [formData, setFormData] = useState({
@@ -27,7 +31,7 @@ export const Login = () => {
 
     try {      
       console.log(import.meta.env.VITE_API_URL);
-      const response = await fetch(`https://termas-server.vercel.app/api/auth`, {
+      const response = await fetch(`${VITE_API_URL}/auth`, {
         method:'POST',
         headers: {
           'Content-Type': 'application/json',

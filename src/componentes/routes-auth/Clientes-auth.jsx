@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { Clientes } from "../pages/Clientes";
+import { getEnvironments } from '../../helpers/getEnvironments';
 
 //Este componente es un estadio intermedio entre la vista anterior y la vista Clientes
 //el objetivo es validar el JWT guadado en el localStorage antes de renderizar Clientes

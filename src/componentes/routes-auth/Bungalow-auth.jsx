@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { Bungalow } from "../pages/Bungalow";
+import { getEnvironments } from '../../helpers/getEnvironments';
 
 //Este componente es un estadio intermedio entre la vista anterior y la vista Bungalow
 //el objetivo es validar el JWT guadado en el localStorage antes de renderizar Bungalow
