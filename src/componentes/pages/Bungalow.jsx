@@ -177,7 +177,7 @@ export const Bungalow = () => {
           <input type="text" required={true} className="campo" name="nombre" value={nombre} onChange={handleInputChange} placeholder="Nombre" />
           <input type="text" required={true} className="campo" name="apellido" value={apellido} onChange={handleInputChange} placeholder="Apellido" />
           <input type="phone" required={true} className="campo" name="telefono" value={telefono} onChange={handleInputChange} placeholder="Teléfono" />
-          <input type="email" required={true} className="campo" name="email" value={email} onChange={handleInputChange} placeholder="Email" />
+          <input type="email" className="campo" name="email" value={email} onChange={handleInputChange} placeholder="Email" />
           <input type="number" required={true} className="campo" name="documento" value={documento} onChange={handleInputChange} placeholder="Documento" />
           <input type="text" className="campo" name="auto" value={auto} onChange={handleInputChange} placeholder="Marca de auto" />
           <input type="text" className="campo" name="patente" value={patente} onChange={handleInputChange} placeholder="Patente" />
