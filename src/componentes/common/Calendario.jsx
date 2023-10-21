@@ -46,8 +46,8 @@ function Calendario({ onFechasSeleccionadas }) {
 
   };
 
-  //Declaramos como today el dia de la fecha
-  const today = addDays(startOfDay(new Date()));
+  //Declaramos como today el dia de la fecha mas 2 dias para esperar acreditacion del pago de reserva
+  const today = addDays(startOfDay(new Date()), 0);
 
 
   //Obtenemos las reservas
