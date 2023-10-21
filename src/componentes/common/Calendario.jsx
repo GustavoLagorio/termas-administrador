@@ -46,10 +46,6 @@ function Calendario({ onFechasSeleccionadas }) {
 
   };
 
-  //Declaramos como today el dia de la fecha mas 2 dias para esperar acreditacion del pago de reserva
-  const today = addDays(startOfDay(new Date()), 3);
-
-
   //Obtenemos las reservas
   const obtenerReservas = async (bungalowId) => {
 
