@@ -46,6 +46,10 @@ function Calendario({ onFechasSeleccionadas }) {
 
   };
 
+  //Declaramos como today el dia de la fecha
+  const today = addDays(startOfDay(new Date()));
+
+
   //Obtenemos las reservas
   const obtenerReservas = async (bungalowId) => {
 
